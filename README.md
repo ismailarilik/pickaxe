@@ -4,8 +4,8 @@ A text editor written in Ruby/Tk
 
 ## Requirements
 
-- Ruby
-- Tk
+- Ruby 2.6 or above
+- Tk 8.6
 
 ## Installation
 
