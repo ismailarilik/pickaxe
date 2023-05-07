@@ -5,5 +5,9 @@ require:
   - rubocop-rubycw
 
 AllCops:
+  NewCops: enable
   TargetRubyVersion: 2.6
+
+Layout/TrailingEmptyLines:
+  EnforcedStyle: final_blank_line
 
