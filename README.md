@@ -12,7 +12,7 @@ A text editor written in Ruby/Tk
 Install the gem by cloning the repo, installing dependencies and running the `install` task:
 
 ```sh
-git clone https://github.com/ismailarilik/pickaxe
+git clone https://github.com/ismailarilik/pickaxe.git
 bundle
 bundle exec rake install
 ```
