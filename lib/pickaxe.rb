@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "pickaxe/version"
+require_relative 'pickaxe/version'
 
 module Pickaxe
   class Error < StandardError; end
