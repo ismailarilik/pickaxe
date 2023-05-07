@@ -1,13 +1,20 @@
-# Pickaxegem
+# Pickaxe
 
 A text editor written in Ruby/Tk
 
+## Requirements
+
+- Ruby
+- Tk
+
 ## Installation
 
-Install the gem by executing:
+Install the gem by cloning the repo, installing dependencies and running the `install` task:
 
 ```sh
-gem install pickaxegem
+git clone https://github.com/ismailarilik/pickaxe
+bundle
+bundle exec rake install
 ```
 
 ## Usage
@@ -23,7 +30,7 @@ pickaxe
 After checking out the repo, run `bin/setup` to install dependencies.
 Then, run `bundle exec rake` to run the static code analysis and tests.
 
-Put your Ruby code in the file `lib/pickaxegem`.
+Put your Ruby code in the file `lib/pickaxe`.
 To experiment with that code, run `bin/console` for an interactive prompt.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
@@ -31,8 +38,8 @@ To release a new version, update the version number in `version.rb`, and then ru
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/pickaxegem/pickaxe.
-This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/pickaxegem/pickaxe/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/ismailarilik/pickaxe.
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/ismailarilik/pickaxe/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -40,9 +47,5 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Pickaxegem project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/pickaxegem/pickaxe/blob/main/CODE_OF_CONDUCT.md).
-
-## Attribution
-
-[The pickaxe icon is created by Smashicons - Flaticon](https://www.flaticon.com/free-icons/pickaxe)
+Everyone interacting in the Pickaxegem project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/ismailarilik/pickaxe/blob/main/CODE_OF_CONDUCT.md).
 

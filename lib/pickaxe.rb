@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "pickaxegem/version"
+require_relative "pickaxe/version"
 
-module Pickaxegem
+module Pickaxe
   class Error < StandardError; end
   # Your code goes here...
 end

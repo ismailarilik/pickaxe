@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in pickaxegem.gemspec
+# Specify your gem's dependencies in pickaxe.gemspec
 gemspec
 
 gem "rake", "~> 13.0"

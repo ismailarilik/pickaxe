@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    pickaxegem (0.1.0)
+    pickaxe (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -48,7 +48,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  pickaxegem!
+  pickaxe!
   rake (~> 13.0)
   rspec (~> 3.12)
   rubocop (~> 1.50)

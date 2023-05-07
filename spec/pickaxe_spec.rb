@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe Pickaxegem do
+RSpec.describe Pickaxe do
   it "has a version number" do
-    expect(Pickaxegem::VERSION).not_to be nil
+    expect(Pickaxe::VERSION).not_to be nil
   end
 
   it "does something useful" do

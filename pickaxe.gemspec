@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-require_relative "lib/pickaxegem/version"
+require_relative "lib/pickaxe/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "pickaxegem"
-  spec.version = Pickaxegem::VERSION
+  spec.name = "pickaxe"
+  spec.version = Pickaxe::VERSION
   spec.authors = ["İsmail Arılık"]
   spec.email = ["arilik.ismail@gmail.com"]
 
   spec.summary = "A text editor written in Ruby/Tk"
-  spec.homepage = "https://github.com/pickaxegem/pickaxe"
+  spec.homepage = "https://github.com/ismailarilik/pickaxe"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/pickaxegem/pickaxe"
-  spec.metadata["changelog_uri"] = "https://github.com/pickaxegem/pickaxe/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/ismailarilik/pickaxe"
+  spec.metadata["changelog_uri"] = "https://github.com/ismailarilik/pickaxe/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
