@@ -1,0 +1,7 @@
+module Pickaxe
+  module Widgets
+    class Window
+    end
+  end
+end
+
