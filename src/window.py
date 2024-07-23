@@ -24,7 +24,7 @@ from gi.repository import Gtk
 class PickaxeWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'PickaxeWindow'
 
-    label = Gtk.Template.Child()
+    editor_view = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

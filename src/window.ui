@@ -31,6 +31,11 @@
             <property name="margin-bottom">6</property>
             <property name="margin-start">6</property>
             <property name="margin-end">6</property>
+            <property name="child">
+              <object class="GtkTextView" id="editor_view">
+                <property name="monospace">true</property>
+              </object>
+            </property>
           </object>
         </property>
       </object>
