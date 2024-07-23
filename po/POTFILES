@@ -1,0 +1,6 @@
+data/com.ismailarilik.Pickaxe.desktop.in
+data/com.ismailarilik.Pickaxe.metainfo.xml.in
+data/com.ismailarilik.Pickaxe.gschema.xml
+src/main.py
+src/window.py
+src/window.ui

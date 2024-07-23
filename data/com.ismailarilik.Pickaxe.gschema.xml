@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="pickaxe">
+	<schema id="com.ismailarilik.Pickaxe" path="/com/ismailarilik/Pickaxe/">
+	</schema>
+</schemalist>
