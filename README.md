@@ -1,3 +1,3 @@
 # pickaxe
 
-A description of this project.
+A text editor written in Python/GTK
