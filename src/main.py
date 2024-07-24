@@ -1,6 +1,6 @@
 # main.py
 #
-# Copyright 2024 Unknown
+# Copyright 2024 ismailarilik
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,16 +23,17 @@ import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Gtk, Gio, Adw
+from gi.repository import Gio, Adw
 from .window import PickaxeWindow
-
 
 class PickaxeApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id="com.ismailarilik.Pickaxe",
-                         flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
+        super().__init__(
+            application_id="com.ismailarilik.Pickaxe",
+            flags=Gio.ApplicationFlags.DEFAULT_FLAGS
+        )
         self.create_action("quit", lambda *_: self.quit(), ["<primary>q"])
         self.create_action("about", self.on_about_action)
         self.create_action("preferences", self.on_preferences_action)
@@ -53,13 +54,15 @@ class PickaxeApplication(Adw.Application):
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
-        about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name="pickaxe",
-                                application_icon="com.ismailarilik.Pickaxe",
-                                developer_name="ismailarilik",
-                                version="0.1.0",
-                                developers=["ismailarilik"],
-                                copyright="© 2024 ismailarilik")
+        about = Adw.AboutWindow(
+            transient_for=self.props.active_window,
+            application_name="pickaxe",
+            application_icon="com.ismailarilik.Pickaxe",
+            developer_name="ismailarilik",
+            version="0.1.0",
+            developers=["ismailarilik"],
+            copyright="© 2024 ismailarilik"
+        )
         about.present()
 
     def on_preferences_action(self, widget, _):
@@ -71,8 +74,7 @@ class PickaxeApplication(Adw.Application):
 
         Args:
             name: the name of the action
-            callback: the function to be called when the action is
-              activated
+            callback: the function to be called when the action is activated
             shortcuts: an optional list of accelerators
         """
         action = Gio.SimpleAction.new(name, None)
