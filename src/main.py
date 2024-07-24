@@ -56,10 +56,10 @@ class PickaxeApplication(Adw.Application):
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name="pickaxe",
                                 application_icon="com.ismailarilik.Pickaxe",
-                                developer_name="Unknown",
+                                developer_name="ismailarilik",
                                 version="0.1.0",
-                                developers=["Unknown"],
-                                copyright="© 2024 Unknown")
+                                developers=["ismailarilik"],
+                                copyright="© 2024 ismailarilik")
         about.present()
 
     def on_preferences_action(self, widget, _):
