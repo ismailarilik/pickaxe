@@ -20,8 +20,8 @@
 import sys
 import gi
 
-gi.require_version('Gtk', '4.0')
-gi.require_version('Adw', '1')
+gi.require_version("Gtk", "4.0")
+gi.require_version("Adw", "1")
 
 from gi.repository import Gtk, Gio, Adw
 from .window import PickaxeWindow
@@ -31,13 +31,13 @@ class PickaxeApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='com.ismailarilik.Pickaxe',
+        super().__init__(application_id="com.ismailarilik.Pickaxe",
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
-        self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
-        self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action)
+        self.create_action("quit", lambda *_: self.quit(), ["<primary>q"])
+        self.create_action("about", self.on_about_action)
+        self.create_action("preferences", self.on_preferences_action)
 
-        self.set_accels_for_action('win.open-file', ['<Ctrl>o'])
+        self.set_accels_for_action("win.open-file", ["<Ctrl>o"])
         self.set_accels_for_action("win.save-as", ["<Ctrl><Shift>s"])
 
     def do_activate(self):
@@ -54,17 +54,17 @@ class PickaxeApplication(Adw.Application):
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='pickaxe',
-                                application_icon='com.ismailarilik.Pickaxe',
-                                developer_name='Unknown',
-                                version='0.1.0',
-                                developers=['Unknown'],
-                                copyright='© 2024 Unknown')
+                                application_name="pickaxe",
+                                application_icon="com.ismailarilik.Pickaxe",
+                                developer_name="Unknown",
+                                version="0.1.0",
+                                developers=["Unknown"],
+                                copyright="© 2024 Unknown")
         about.present()
 
     def on_preferences_action(self, widget, _):
         """Callback for the app.preferences action."""
-        print('app.preferences action activated')
+        print("app.preferences action activated")
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
@@ -86,3 +86,4 @@ def main(version):
     """The application's entry point."""
     app = PickaxeApplication()
     return app.run(sys.argv)
+
