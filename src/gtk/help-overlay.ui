@@ -20,7 +20,7 @@
                 >
                   Open file
                 </property>
-                <property name="action-name">win.open_file</property>
+                <property name="action-name">win.open-file</property>
               </object>
             </child>
             <child>

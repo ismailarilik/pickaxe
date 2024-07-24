@@ -30,7 +30,7 @@ class PickaxeWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        open_file_action = Gio.SimpleAction(name="open_file")
+        open_file_action = Gio.SimpleAction(name="open-file")
         open_file_action.connect("activate", self.open_file_dialog)
         self.add_action(open_file_action)
 
