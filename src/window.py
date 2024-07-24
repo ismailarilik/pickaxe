@@ -41,6 +41,26 @@ class PickaxeWindow(Adw.ApplicationWindow):
         buffer = self.editor_view.get_buffer()
         buffer.connect("notify::cursor-position", self.update_cursor_position)
 
+        self.settings = Gio.Settings(schema_id="com.ismailarilik.Pickaxe")
+        self.settings.bind(
+            "window-width",
+            self,
+            "default-width",
+            Gio.SettingsBindFlags.DEFAULT
+        )
+        self.settings.bind(
+            "window-height",
+            self,
+            "default-height",
+            Gio.SettingsBindFlags.DEFAULT
+        )
+        self.settings.bind(
+            "window-maximized",
+            self,
+            "maximized",
+            Gio.SettingsBindFlags.DEFAULT
+        )
+
     def open_file_dialog(self, action, _):
         # Create a new file selection dialog, using the "open" mode
         native = Gtk.FileDialog()
