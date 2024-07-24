@@ -19,19 +19,23 @@
 
 from gi.repository import Adw, Gio, Gtk
 
-@Gtk.Template(resource_path='/com/ismailarilik/Pickaxe/window.ui')
+@Gtk.Template(resource_path="/com/ismailarilik/Pickaxe/window.ui")
 class PickaxeWindow(Adw.ApplicationWindow):
-    __gtype_name__ = 'PickaxeWindow'
+    __gtype_name__ = "PickaxeWindow"
 
     editor_view = Gtk.Template.Child()
     open_file_button = Gtk.Template.Child()
+    cursor_pos = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        open_file_action = Gio.SimpleAction(name='open_file')
-        open_file_action.connect('activate', self.open_file_dialog)
+        open_file_action = Gio.SimpleAction(name="open_file")
+        open_file_action.connect("activate", self.open_file_dialog)
         self.add_action(open_file_action)
+
+        buffer = self.editor_view.get_buffer()
+        buffer.connect("notify::cursor-position", self.update_cursor_position)
 
     def open_file_dialog(self, action, _):
         # Create a new file selection dialog, using the "open" mode
@@ -50,26 +54,26 @@ class PickaxeWindow(Adw.ApplicationWindow):
 
     def open_file_complete(self, file, result):
         info = file.query_info(
-            'standard::display-name',
+            "standard::display-name",
             Gio.FileQueryInfoFlags.NONE
         )
         if info:
-            display_name = info.get_attribute_string('standard::display-name')
+            display_name = info.get_attribute_string("standard::display-name")
         else:
             display_name = file.get_basename()
 
         contents = file.load_contents_finish(result)
         if not contents[0]:
             path = file.peek_path()
-            print(f'Unable to open {path}: {contents[1]}')
+            print(f"Unable to open {path}: {contents[1]}")
 
         try:
-            text = contents[1].decode('utf-8')
+            text = contents[1].decode("utf-8")
         except UnicodeError as err:
             path = file.peek_path()
             print(
-                f'Unable to load the contents of {path}: '
-                'the file is not encoded with UTF-8'
+                f"Unable to load the contents of {path}: "
+                "the file is not encoded with UTF-8"
             )
             return
 
@@ -79,3 +83,14 @@ class PickaxeWindow(Adw.ApplicationWindow):
         buffer.place_cursor(start)
 
         self.set_title(display_name)
+
+    def update_cursor_position(self, buffer, _):
+        # Retrieve the value of the "cursor-position" property
+        cursor_pos = buffer.props.cursor_position
+        # Construct the text iterator for the position of the cursor
+        iter = buffer.get_iter_at_offset(cursor_pos)
+        line = iter.get_line() + 1
+        column = iter.get_line_offset() + 1
+        # Set the new contents of the label
+        self.cursor_pos.set_text(f"Ln {line}, Col {column}")
+
