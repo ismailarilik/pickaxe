@@ -38,6 +38,7 @@ class PickaxeApplication(Adw.Application):
         self.create_action('preferences', self.on_preferences_action)
 
         self.set_accels_for_action('win.open-file', ['<Ctrl>o'])
+        self.set_accels_for_action("win.save-as", ["<Ctrl><Shift>s"])
 
     def do_activate(self):
         """Called when the application is activated.
