@@ -23,7 +23,7 @@ import gi
 gi.require_version("Gtk", "4.0")
 gi.require_version("Adw", "1")
 
-from gi.repository import Gio, Adw
+from gi.repository import Adw, Gio, GLib
 from .window import PickaxeWindow
 
 class PickaxeApplication(Adw.Application):
@@ -34,6 +34,23 @@ class PickaxeApplication(Adw.Application):
             application_id="com.ismailarilik.Pickaxe",
             flags=Gio.ApplicationFlags.DEFAULT_FLAGS
         )
+
+        self.settings = Gio.Settings(schema_id="com.ismailarilik.Pickaxe")
+
+        dark_mode = self.settings.get_boolean("dark-mode")
+        style_manager = Adw.StyleManager.get_default()
+        if dark_mode:
+            style_manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
+        else:
+            style_manager.set_color_scheme(Adw.ColorScheme.DEFAULT)
+
+        dark_mode_action = Gio.SimpleAction(
+            name="dark-mode",
+            state=GLib.Variant.new_boolean(dark_mode)
+        )
+        dark_mode_action.connect("activate", self.toggle_dark_mode)
+        dark_mode_action.connect("change-state", self.change_color_scheme)
+        self.add_action(dark_mode_action)
         self.create_action("quit", lambda *_: self.quit(), ["<primary>q"])
         self.create_action("about", self.on_about_action)
         self.create_action("preferences", self.on_preferences_action)
@@ -51,6 +68,22 @@ class PickaxeApplication(Adw.Application):
         if not win:
             win = PickaxeWindow(application=self)
         win.present()
+
+    def toggle_dark_mode(self, action, _):
+        state = action.get_state()
+        old_state = state.get_boolean()
+        new_state = not old_state
+        action.change_state(GLib.Variant.new_boolean(new_state))
+
+    def change_color_scheme(self, action, new_state):
+        dark_mode = new_state.get_boolean()
+        style_manager = Adw.StyleManager.get_default()
+        if dark_mode:
+            style_manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
+        else:
+            style_manager.set_color_scheme(Adw.ColorScheme.DEFAULT)
+        action.set_state(new_state)
+        self.settings.set_boolean("dark-mode", dark_mode)
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
