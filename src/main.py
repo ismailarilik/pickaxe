@@ -44,10 +44,7 @@ class PickaxeApplication(Adw.Application):
         else:
             style_manager.set_color_scheme(Adw.ColorScheme.DEFAULT)
 
-        dark_mode_action = Gio.SimpleAction(
-            name="dark-mode",
-            state=GLib.Variant.new_boolean(dark_mode)
-        )
+        dark_mode_action = Gio.SimpleAction(name="dark-mode", state=GLib.Variant.new_boolean(dark_mode))
         dark_mode_action.connect("activate", self.toggle_dark_mode)
         dark_mode_action.connect("change-state", self.change_color_scheme)
         self.add_action(dark_mode_action)
@@ -61,8 +58,7 @@ class PickaxeApplication(Adw.Application):
     def do_activate(self):
         """Called when the application is activated.
 
-        We raise the application's main window, creating it if
-        necessary.
+        We raise the application's main window, creating it if necessary.
         """
         win = self.props.active_window
         if not win:

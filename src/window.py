@@ -43,24 +43,9 @@ class PickaxeWindow(Adw.ApplicationWindow):
         buffer.connect("notify::cursor-position", self.update_cursor_position)
 
         self.settings = Gio.Settings(schema_id="com.ismailarilik.Pickaxe")
-        self.settings.bind(
-            "window-width",
-            self,
-            "default-width",
-            Gio.SettingsBindFlags.DEFAULT
-        )
-        self.settings.bind(
-            "window-height",
-            self,
-            "default-height",
-            Gio.SettingsBindFlags.DEFAULT
-        )
-        self.settings.bind(
-            "window-maximized",
-            self,
-            "maximized",
-            Gio.SettingsBindFlags.DEFAULT
-        )
+        self.settings.bind("window-width", self, "default-width", Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind("window-height", self, "default-height", Gio.SettingsBindFlags.DEFAULT)
+        self.settings.bind("window-maximized", self, "maximized", Gio.SettingsBindFlags.DEFAULT)
 
     def open_file_dialog(self, action, _):
         # Create a new file selection dialog, using the "open" mode
@@ -78,10 +63,7 @@ class PickaxeWindow(Adw.ApplicationWindow):
         file.load_contents_async(None, self.open_file_complete)
 
     def open_file_complete(self, file, result):
-        info = file.query_info(
-            "standard::display-name",
-            Gio.FileQueryInfoFlags.NONE
-        )
+        info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
         if info:
             display_name = info.get_attribute_string("standard::display-name")
         else:
@@ -89,17 +71,13 @@ class PickaxeWindow(Adw.ApplicationWindow):
 
         contents = file.load_contents_finish(result)
         if not contents[0]:
-            self.toast_overlay.add_toast(
-                Adw.Toast(title=f"Unable to open “{display_name}”")
-            )
+            self.toast_overlay.add_toast(Adw.Toast(title=f"Unable to open “{display_name}”"))
             return
 
         try:
             text = contents[1].decode("utf-8")
         except UnicodeError as err:
-            self.toast_overlay.add_toast(
-                Adw.Toast(title=f"Invalid text encoding for “{display_name}”")
-            )
+            self.toast_overlay.add_toast(Adw.Toast(title=f"Invalid text encoding for “{display_name}”"))
             return
 
         buffer = self.editor_view.get_buffer()
@@ -108,9 +86,7 @@ class PickaxeWindow(Adw.ApplicationWindow):
         buffer.place_cursor(start)
 
         self.set_title(display_name)
-        self.toast_overlay.add_toast(
-            Adw.Toast(title=f"Opened “{display_name}”")
-        )
+        self.toast_overlay.add_toast(Adw.Toast(title=f"Opened “{display_name}”"))
 
     def save_file_as_dialog(self, action, _):
         native = Gtk.FileDialog()
@@ -138,21 +114,11 @@ class PickaxeWindow(Adw.ApplicationWindow):
         bytes = GLib.Bytes.new(text.encode('utf-8'))
 
         # Start the asynchronous operation to save the data into the file
-        file.replace_contents_bytes_async(
-            bytes,
-            None,
-            False,
-            Gio.FileCreateFlags.NONE,
-            None,
-            self.save_file_complete
-        )
+        file.replace_contents_bytes_async(bytes, None, False, Gio.FileCreateFlags.NONE, None, self.save_file_complete)
 
     def save_file_complete(self, file, result):
         res = file.replace_contents_finish(result)
-        info = file.query_info(
-            "standard::display-name",
-            Gio.FileQueryInfoFlags.NONE
-        )
+        info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
         if info:
             display_name = info.get_attribute_string("standard::display-name")
         else:

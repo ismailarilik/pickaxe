@@ -13,11 +13,7 @@
             </property>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property
-                  name="title"
-                  translatable="yes"
-                  context="shortcut window"
-                >
+                <property name="title" translatable="yes" context="shortcut window">
                   Open File
                 </property>
                 <property name="action-name">win.open-file</property>
@@ -25,11 +21,7 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property
-                  name="title"
-                  translatable="yes"
-                  context="shortcut window"
-                >
+                <property name="title" translatable="yes" context="shortcut window">
                   Save As
                 </property>
                 <property name="action-name">win.save-as</property>
@@ -37,11 +29,7 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property
-                  name="title"
-                  translatable="yes"
-                  context="shortcut window"
-                >
+                <property name="title" translatable="yes" context="shortcut window">
                   Show Shortcuts
                 </property>
                 <property name="action-name">win.show-help-overlay</property>
@@ -49,11 +37,7 @@
             </child>
             <child>
               <object class="GtkShortcutsShortcut">
-                <property
-                  name="title"
-                  translatable="yes"
-                  context="shortcut window"
-                >
+                <property name="title" translatable="yes" context="shortcut window">
                   Quit
                 </property>
                 <property name="action-name">app.quit</property>
