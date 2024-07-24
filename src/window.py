@@ -26,6 +26,7 @@ class PickaxeWindow(Adw.ApplicationWindow):
     editor_view = Gtk.Template.Child()
     open_file_button = Gtk.Template.Child()
     cursor_pos = Gtk.Template.Child()
+    toast_overlay = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -88,16 +89,16 @@ class PickaxeWindow(Adw.ApplicationWindow):
 
         contents = file.load_contents_finish(result)
         if not contents[0]:
-            path = file.peek_path()
-            print(f"Unable to open {path}: {contents[1]}")
+            self.toast_overlay.add_toast(
+                Adw.Toast(title=f"Unable to open “{display_name}”")
+            )
+            return
 
         try:
             text = contents[1].decode("utf-8")
         except UnicodeError as err:
-            path = file.peek_path()
-            print(
-                f"Unable to load the contents of {path}: "
-                "the file is not encoded with UTF-8"
+            self.toast_overlay.add_toast(
+                Adw.Toast(title=f"Invalid text encoding for “{display_name}”")
             )
             return
 
@@ -107,6 +108,9 @@ class PickaxeWindow(Adw.ApplicationWindow):
         buffer.place_cursor(start)
 
         self.set_title(display_name)
+        self.toast_overlay.add_toast(
+            Adw.Toast(title=f"Opened “{display_name}”")
+        )
 
     def save_file_as_dialog(self, action, _):
         native = Gtk.FileDialog()
@@ -153,10 +157,13 @@ class PickaxeWindow(Adw.ApplicationWindow):
             display_name = info.get_attribute_string("standard::display-name")
         else:
             display_name = file.get_basename()
+
         if not res:
-            print(f"Unable to save {display_name}")
+            msg = f"Unable to save as “{display_name}”"
         else:
+            msg = f"Saved as “{display_name}”"
             self.set_title(display_name)
+        self.toast_overlay.add_toast(Adw.Toast(title=msg))
 
     def update_cursor_position(self, buffer, _):
         # Retrieve the value of the "cursor-position" property
