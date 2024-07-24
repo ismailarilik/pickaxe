@@ -167,4 +167,3 @@ class PickaxeWindow(Adw.ApplicationWindow):
         column = iter.get_line_offset() + 1
         # Set the new contents of the label
         self.cursor_pos.set_text(f"Ln {line}, Col {column}")
-

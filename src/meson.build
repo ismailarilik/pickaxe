@@ -2,7 +2,8 @@ pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
 moduledir = pkgdatadir / 'pickaxe'
 gnome = import('gnome')
 
-gnome.compile_resources('pickaxe',
+gnome.compile_resources(
+  'pickaxe',
   'pickaxe.gresource.xml',
   gresource_bundle: true,
   install: true,

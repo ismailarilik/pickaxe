@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="pickaxe">
-	<schema id="com.ismailarilik.Pickaxe" path="/com/ismailarilik/Pickaxe/">
-	  <key name="window-width" type="i">
+  <schema id="com.ismailarilik.Pickaxe" path="/com/ismailarilik/Pickaxe/">
+    <key name="window-width" type="i">
       <default>600</default>
     </key>
     <key name="window-height" type="i">
