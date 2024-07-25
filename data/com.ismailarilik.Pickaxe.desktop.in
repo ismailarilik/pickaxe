@@ -4,5 +4,5 @@ Exec=pickaxe
 Icon=com.ismailarilik.Pickaxe
 Terminal=false
 Type=Application
-Categories=GTK;
+Categories=GTK;Python;Editor
 StartupNotify=true
