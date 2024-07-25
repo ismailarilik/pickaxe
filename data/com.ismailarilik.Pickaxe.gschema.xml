@@ -11,7 +11,7 @@
       <default>false</default>
     </key>
     <key name="dark-mode" type="b">
-      <default>false</default>
+      <default>true</default>
     </key>
 	</schema>
 </schemalist>
