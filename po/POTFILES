@@ -3,4 +3,9 @@ data/com.ismailarilik.Pickaxe.metainfo.xml.in
 data/com.ismailarilik.Pickaxe.gschema.xml
 src/main.py
 src/window.py
+src/actions/open_file.py
+src/actions/save_as.py
+src/editor/editor_view.py
 src/window.ui
+src/editor/editor_view.ui
+src/menu.ui

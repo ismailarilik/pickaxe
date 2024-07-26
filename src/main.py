@@ -30,30 +30,15 @@ class PickaxeApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(
-            application_id="com.ismailarilik.Pickaxe",
-            flags=Gio.ApplicationFlags.DEFAULT_FLAGS
-        )
+        super().__init__(application_id="com.ismailarilik.Pickaxe", flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
 
         self.settings = Gio.Settings(schema_id="com.ismailarilik.Pickaxe")
 
-        dark_mode = self.settings.get_boolean("dark-mode")
-        style_manager = Adw.StyleManager.get_default()
-        if dark_mode:
-            style_manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
-        else:
-            style_manager.set_color_scheme(Adw.ColorScheme.DEFAULT)
+        self.set_initial_color_scheme()
 
-        dark_mode_action = Gio.SimpleAction(name="dark-mode", state=GLib.Variant.new_boolean(dark_mode))
-        dark_mode_action.connect("activate", self.toggle_dark_mode)
-        dark_mode_action.connect("change-state", self.change_color_scheme)
-        self.add_action(dark_mode_action)
-        self.create_action("quit", lambda *_: self.quit(), ["<primary>q"])
-        self.create_action("about", self.on_about_action)
-        self.create_action("preferences", self.on_preferences_action)
+        self.add_actions()
 
-        self.set_accels_for_action("win.open-file", ["<Ctrl>o"])
-        self.set_accels_for_action("win.save-as", ["<Ctrl><Shift>s"])
+        self.set_accels()
 
     def do_activate(self):
         """Called when the application is activated.
@@ -65,7 +50,30 @@ class PickaxeApplication(Adw.Application):
             win = PickaxeWindow(application=self)
         win.present()
 
-    def toggle_dark_mode(self, action, _):
+    def set_initial_color_scheme(self):
+        dark_mode = self.settings.get_boolean("dark-mode")
+        style_manager = Adw.StyleManager.get_default()
+        if dark_mode:
+            style_manager.set_color_scheme(Adw.ColorScheme.FORCE_DARK)
+        else:
+            style_manager.set_color_scheme(Adw.ColorScheme.DEFAULT)
+
+    def add_actions(self):
+        dark_mode = self.settings.get_boolean("dark-mode")
+        dark_mode_action = Gio.SimpleAction(name="dark-mode", state=GLib.Variant.new_boolean(dark_mode))
+        dark_mode_action.connect("activate", self.toggle_dark_mode)
+        dark_mode_action.connect("change-state", self.change_color_scheme)
+        self.add_action(dark_mode_action)
+
+        self.create_action("quit", lambda *__: self.quit(), ["<primary>q"])
+        self.create_action("about", self.on_about_action)
+        self.create_action("preferences", self.on_preferences_action)
+
+    def set_accels(self):
+        self.set_accels_for_action("win.open-file", ["<Ctrl>o"])
+        self.set_accels_for_action("win.save-as", ["<Ctrl><Shift>s"])
+
+    def toggle_dark_mode(self, action, __):
         state = action.get_state()
         old_state = state.get_boolean()
         new_state = not old_state
@@ -81,7 +89,7 @@ class PickaxeApplication(Adw.Application):
         action.set_state(new_state)
         self.settings.set_boolean("dark-mode", dark_mode)
 
-    def on_about_action(self, widget, _):
+    def on_about_action(self, widget, __):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(
             transient_for=self.props.active_window,
@@ -94,24 +102,23 @@ class PickaxeApplication(Adw.Application):
         )
         about.present()
 
-    def on_preferences_action(self, widget, _):
+    def on_preferences_action(self, widget, __):
         """Callback for the app.preferences action."""
         print("app.preferences action activated")
 
-    def create_action(self, name, callback, shortcuts=None):
+    def create_action(self, name, callback, accels=None):
         """Add an application action.
 
         Args:
             name: the name of the action
             callback: the function to be called when the action is activated
-            shortcuts: an optional list of accelerators
+            accels: an optional list of accelerators
         """
-        action = Gio.SimpleAction.new(name, None)
+        action = Gio.SimpleAction.new(name)
         action.connect("activate", callback)
         self.add_action(action)
-        if shortcuts:
-            self.set_accels_for_action(f"app.{name}", shortcuts)
-
+        if accels:
+            self.set_accels_for_action(f"app.{name}", accels)
 
 def main(version):
     """The application's entry point."""

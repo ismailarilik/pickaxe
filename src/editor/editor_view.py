@@ -1,6 +1,4 @@
-#!@PYTHON@
-
-# pickaxe.in
+# editor_view.py
 #
 # Copyright 2024 ismailarilik
 #
@@ -19,28 +17,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os
-import sys
-import signal
-import locale
-import gettext
+from gi.repository import Gtk
 
-VERSION = "@VERSION@"
-pkgdatadir = "@pkgdatadir@"
-localedir = "@localedir@"
-
-sys.path.insert(1, pkgdatadir)
-signal.signal(signal.SIGINT, signal.SIG_DFL)
-locale.bindtextdomain("pickaxe", localedir)
-locale.textdomain("pickaxe")
-gettext.install("pickaxe", localedir)
-
-if __name__ == "__main__":
-    import gi
-
-    from gi.repository import Gio
-    resource = Gio.Resource.load(os.path.join(pkgdatadir, "pickaxe.gresource"))
-    resource._register()
-
-    from pickaxe import main
-    sys.exit(main.main(VERSION))
+@Gtk.Template(resource_path="/com/ismailarilik/Pickaxe/editor/editor_view.ui")
+class EditorView(Gtk.TextView):
+    __gtype_name__ = "EditorView"

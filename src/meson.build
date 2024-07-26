@@ -1,5 +1,7 @@
 pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
 moduledir = pkgdatadir / 'pickaxe'
+actionsdir = moduledir / 'actions'
+editordir = moduledir / 'editor'
 gnome = import('gnome')
 
 gnome.compile_resources(
@@ -32,5 +34,16 @@ pickaxe_sources = [
   'main.py',
   'window.py',
 ]
+actions_sources = [
+  'actions/__init__.py',
+  'actions/open_file.py',
+  'actions/save_as.py',
+]
+editor_sources = [
+  'editor/__init__.py',
+  'editor/editor_view.py',
+]
 
 install_data(pickaxe_sources, install_dir: moduledir)
+install_data(actions_sources, install_dir: actionsdir)
+install_data(editor_sources, install_dir: editordir)
