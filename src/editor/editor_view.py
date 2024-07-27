@@ -17,8 +17,22 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Gtk
+from gi.repository import Gio, Gtk
 
 @Gtk.Template(resource_path="/com/ismailarilik/Pickaxe/editor/editor_view.ui")
 class EditorView(Gtk.TextView):
     __gtype_name__ = "EditorView"
+
+    def __init__(self, file=None, **kwargs):
+        super().__init__(**kwargs)
+        self.file = None
+
+    def set_file(self, file):
+        self.file = file
+
+        info = self.file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
+        if info:
+            display_name = info.get_attribute_string("standard::display-name")
+        else:
+            display_name = file.get_basename()
+        self.display_name = display_name

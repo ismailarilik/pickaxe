@@ -25,6 +25,7 @@ _ = gettext.gettext
 class OpenFile:
     def __init__(self, window):
         self.window = window
+        self.editor_view = self.window.editor_view
 
     def open_file_dialog(self, action, __):
         # Create a new file selection dialog, using the "open" mode
@@ -59,10 +60,11 @@ class OpenFile:
             self.window.toast_overlay.add_toast(Adw.Toast(title=_(f"Invalid text encoding for “{display_name}”")))
             return
 
-        buffer = self.window.editor_view.get_buffer()
+        buffer = self.editor_view.get_buffer()
         buffer.set_text(text)
 
         start = buffer.get_start_iter()
         buffer.place_cursor(start)
 
-        self.window.set_title(f"{display_name} - {self.window.app_name}")
+        self.editor_view.set_file(file)
+        self.window.set_title(f"{self.editor_view.display_name} - {self.window.app_name}")
