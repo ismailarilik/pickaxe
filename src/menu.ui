@@ -5,7 +5,7 @@
       <attribute name="label" translatable="yes">_File</attribute>
       <section>
         <item>
-          <attribute name="label" translatable="yes">_Save as...</attribute>
+          <attribute name="label" translatable="yes">_Save As...</attribute>
           <attribute name="action">win.save-as</attribute>
         </item>
       </section>
