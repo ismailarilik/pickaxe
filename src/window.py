@@ -37,6 +37,7 @@ class PickaxeWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.app_name = "Pickaxe"
         self.open_file = OpenFile(self)
         self.save_as = SaveAs(self)
 

@@ -65,5 +65,5 @@ class OpenFile:
         start = buffer.get_start_iter()
         buffer.place_cursor(start)
 
-        self.window.set_title(display_name)
+        self.window.set_title(f"{display_name} - {self.window.app_name}")
         self.window.toast_overlay.add_toast(Adw.Toast(title=_(f"Opened “{display_name}”")))
