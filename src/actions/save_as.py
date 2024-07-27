@@ -45,17 +45,35 @@ class SaveAs:
         # Retrieve all the visible text between the two bounds
         text = buffer.get_text(start, end, False)
 
-        # If there is nothing to save, return early
-        if not text:
-            return
+        if text:
+            bytes = GLib.Bytes.new(text.encode("utf-8"))
+            # Start the asynchronous operation to save the data into the file
+            file.replace_contents_bytes_async(
+                bytes,
+                None,
+                False,
+                Gio.FileCreateFlags.NONE,
+                None,
+                self.fill_file_complete
+            )
+        else:
+            file.replace_async(
+                None,
+                False,
+                Gio.FileCreateFlags.NONE,
+                GLib.PRIORITY_DEFAULT,
+                None,
+                self.empty_file_complete
+            )
 
-        bytes = GLib.Bytes.new(text.encode("utf-8"))
+    def fill_file_complete(self, file, result):
+        self.save_file_complete(file, result, file.replace_contents_finish)
 
-        # Start the asynchronous operation to save the data into the file
-        file.replace_contents_bytes_async(bytes, None, False, Gio.FileCreateFlags.NONE, None, self.save_file_complete)
+    def empty_file_complete(self, file, result):
+        self.save_file_complete(file, result, file.replace_finish)
 
-    def save_file_complete(self, file, result):
-        res = file.replace_contents_finish(result)
+    def save_file_complete(self, file, result, finish_method):
+        res = finish_method(result)
         info = file.query_info("standard::display-name", Gio.FileQueryInfoFlags.NONE)
         if info:
             display_name = info.get_attribute_string("standard::display-name")
