@@ -37,6 +37,7 @@ pickaxe_sources = [
 actions_sources = [
   'actions/__init__.py',
   'actions/open_file.py',
+  'actions/save.py',
   'actions/save_as.py',
 ]
 editor_sources = [

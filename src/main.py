@@ -71,6 +71,7 @@ class PickaxeApplication(Adw.Application):
 
     def set_accels(self):
         self.set_accels_for_action("win.open-file", ["<Ctrl>o"])
+        self.set_accels_for_action("win.save", ["<Ctrl>s"])
         self.set_accels_for_action("win.save-as", ["<Ctrl><Shift>s"])
 
     def toggle_dark_mode(self, action, __):

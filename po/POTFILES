@@ -4,6 +4,7 @@ data/com.ismailarilik.Pickaxe.gschema.xml
 src/main.py
 src/window.py
 src/actions/open_file.py
+src/actions/save.py
 src/actions/save_as.py
 src/editor/editor_view.py
 src/window.ui

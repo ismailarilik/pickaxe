@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 from .actions.open_file import OpenFile
+from .actions.save import Save
 from .actions.save_as import SaveAs
 import gettext
 from gi.repository import Adw, Gio, Gtk
@@ -39,6 +40,7 @@ class PickaxeWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
         self.app_name = "Pickaxe"
         self.open_file = OpenFile(self)
+        self.save = Save(self)
         self.save_as = SaveAs(self)
 
         menu_builder = Gtk.Builder.new_from_resource("/com/ismailarilik/Pickaxe/menu.ui")
@@ -54,6 +56,7 @@ class PickaxeWindow(Adw.ApplicationWindow):
 
     def add_actions(self):
         self.create_action("open-file", self.open_file.open_file_dialog)
+        self.create_action("save", self.save.save_file_or_save_file_as_dialog)
         self.create_action("save-as", self.save_as.save_file_as_dialog)
 
     def update_cursor_position(self, buffer, __):
