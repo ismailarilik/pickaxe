@@ -1,6 +1,6 @@
 # pickaxe
 
-An editor written in Ruby/Tk
+A code editor written in Ruby/Tk
 
 # Attribution
 
