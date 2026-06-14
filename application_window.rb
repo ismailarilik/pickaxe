@@ -33,6 +33,39 @@ module Pickaxe
       paned_view.add @editor_notebook
     end
 
+    def bind_keys
+      bind 'Control-n', method(:on_new_file)
+      bind 'Control-N', method(:on_new_file)
+      bind 'Control-o', method(:on_open_file)
+      bind 'Control-O', method(:on_open_file)
+      bind 'Control-Shift-o', method(:on_open_folder)
+      bind 'Control-Shift-O', method(:on_open_folder)
+      bind 'Control-s', method(:on_save_file)
+      bind 'Control-S', method(:on_save_file)
+      bind 'Control-Shift-s', method(:on_save_file_as)
+      bind 'Control-Shift-S', method(:on_save_file_as)
+      bind 'Control-q', method(:on_quit)
+      bind 'Control-Q', method(:on_quit)
+    end
+
+    def bind_protocols
+      protocol 'WM_DELETE_WINDOW', method(:on_quit)
+    end
+
+    def resize_and_center
+      screen_width = winfo_screenwidth
+      screen_height = winfo_screenheight
+      width = screen_width / 2
+      height = screen_height / 2
+      x = (screen_width / 2) - (width / 2)
+      y = (screen_height / 2) - (height / 2)
+      geometry("#{width}x#{height}+#{x}+#{y}")
+    end
+
+    def open_file(file_path)
+      @editor_notebook.add_code_view file_path if file_path
+    end
+
     def ask_for_unsaved_changes
       title = 'Unsaved Changes'
       message = 'There are unsaved changes'
@@ -54,27 +87,12 @@ module Pickaxe
       final_result
     end
 
-    def bind_keys
-      bind 'Control-n', method(:on_new_file)
-      bind 'Control-N', method(:on_new_file)
-      bind 'Control-o', method(:on_open_file)
-      bind 'Control-O', method(:on_open_file)
-      bind 'Control-Shift-o', method(:on_open_folder)
-      bind 'Control-Shift-O', method(:on_open_folder)
-      bind 'Control-s', method(:on_save_file)
-      bind 'Control-S', method(:on_save_file)
-      bind 'Control-Shift-s', method(:on_save_file_as)
-      bind 'Control-Shift-S', method(:on_save_file_as)
-      bind 'Control-q', method(:on_quit)
-      bind 'Control-Q', method(:on_quit)
-    end
-
-    def bind_protocols
-      protocol 'WM_DELETE_WINDOW', method(:on_quit)
-    end
-
     def has_unsaved_changes?
       @editor_notebook.has_unsaved_changes?
+    end
+
+    def save_unsaved_changes
+      @editor_notebook.save_unsaved_changes
     end
 
     def on_new_file
@@ -95,12 +113,6 @@ module Pickaxe
       end
     end
 
-    def on_quit
-      will_be_destroyed = true
-      will_be_destroyed = ask_for_unsaved_changes if has_unsaved_changes?
-      destroy if will_be_destroyed
-    end
-
     def on_save_file
       saved = @editor_notebook.save_current_code_view
 
@@ -113,22 +125,10 @@ module Pickaxe
       @editor_notebook.save_current_code_view_as
     end
 
-    def open_file(file_path)
-      @editor_notebook.add_code_view file_path if file_path
-    end
-
-    def resize_and_center
-      screen_width = winfo_screenwidth
-      screen_height = winfo_screenheight
-      width = screen_width / 2
-      height = screen_height / 2
-      x = (screen_width / 2) - (width / 2)
-      y = (screen_height / 2) - (height / 2)
-      geometry("#{width}x#{height}+#{x}+#{y}")
-    end
-
-    def save_unsaved_changes
-      @editor_notebook.save_unsaved_changes
+    def on_quit
+      will_be_destroyed = true
+      will_be_destroyed = ask_for_unsaved_changes if has_unsaved_changes?
+      destroy if will_be_destroyed
     end
   end
 end
