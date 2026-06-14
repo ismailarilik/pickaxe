@@ -67,6 +67,9 @@ module Pickaxe
     end
 
     def ask_for_unsaved_changes
+      # Create a message box to ask the user if they want to save unsaved changes
+      # Returns true if the final state is clean
+      # This means whether the changes are saved or the user don't want to save them
       title = 'Unsaved Changes'
       message = 'There are unsaved changes'
       detail = 'Do you want to save?'
@@ -79,7 +82,6 @@ module Pickaxe
         detail: detail
       )
       final_result = false
-      final_result = false if ask_result == 'cancel'
       final_result = true if ask_result == 'no'
       if ask_result == 'yes'
         final_result = save_unsaved_changes
