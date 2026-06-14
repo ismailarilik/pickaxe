@@ -34,22 +34,22 @@ module Pickaxe
     end
 
     def bind_keys
-      bind 'Control-n', method(:on_new_file)
-      bind 'Control-N', method(:on_new_file)
-      bind 'Control-o', method(:on_open_file)
-      bind 'Control-O', method(:on_open_file)
-      bind 'Control-Shift-o', method(:on_open_folder)
-      bind 'Control-Shift-O', method(:on_open_folder)
-      bind 'Control-s', method(:on_save_file)
-      bind 'Control-S', method(:on_save_file)
-      bind 'Control-Shift-s', method(:on_save_file_as)
-      bind 'Control-Shift-S', method(:on_save_file_as)
-      bind 'Control-q', method(:on_quit)
-      bind 'Control-Q', method(:on_quit)
+      bind 'Control-n', method(:on_control_n)
+      bind 'Control-N', method(:on_control_n)
+      bind 'Control-o', method(:on_control_o)
+      bind 'Control-O', method(:on_control_o)
+      bind 'Control-Shift-o', method(:on_control_shift_o)
+      bind 'Control-Shift-O', method(:on_control_shift_o)
+      bind 'Control-s', method(:on_control_s)
+      bind 'Control-S', method(:on_control_s)
+      bind 'Control-Shift-s', method(:on_control_shift_s)
+      bind 'Control-Shift-S', method(:on_control_shift_s)
+      bind 'Control-q', method(:on_control_q)
+      bind 'Control-Q', method(:on_control_q)
     end
 
     def bind_protocols
-      protocol 'WM_DELETE_WINDOW', method(:on_quit)
+      protocol 'WM_DELETE_WINDOW', method(:on_wm_delete_window)
     end
 
     def resize_and_center
@@ -95,40 +95,52 @@ module Pickaxe
       @editor_notebook.save_unsaved_changes
     end
 
-    def on_new_file
+    def save_file_as
+      @editor_notebook.save_current_code_view_as
+    end
+
+    def quit
+      will_be_destroyed = true
+      will_be_destroyed = ask_for_unsaved_changes if has_unsaved_changes?
+      destroy if will_be_destroyed
+    end
+
+    def on_control_n
       @editor_notebook.add_code_view
     end
 
-    def on_open_file
+    def on_control_o
       file_path = Tk.getOpenFile
       unless file_path.empty?
         open_file file_path
       end
     end
 
-    def on_open_folder
+    def on_control_shift_o
       folder_path = Tk.chooseDirectory
       unless folder_path.empty?
         @explorer_tree_view.open_folder folder_path
       end
     end
 
-    def on_save_file
+    def on_control_s
       saved = @editor_notebook.save_current_code_view
 
       unless saved
-        on_save_file_as
+        save_file_as
       end
     end
 
-    def on_save_file_as
-      @editor_notebook.save_current_code_view_as
+    def on_control_shift_s
+      save_file_as
     end
 
-    def on_quit
-      will_be_destroyed = true
-      will_be_destroyed = ask_for_unsaved_changes if has_unsaved_changes?
-      destroy if will_be_destroyed
+    def on_control_q
+      quit
+    end
+
+    def on_wm_delete_window
+      quit
     end
 
     def on_file_double_clicked_on_explorer_tree_view(event, file_path)
