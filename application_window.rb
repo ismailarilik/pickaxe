@@ -22,6 +22,17 @@ module Pickaxe
       resize_and_center
     end
 
+    def pack_widgets
+      paned_view = Ttk::Paned.new self, orient: :horizontal
+      paned_view.pack fill: :both, expand: true
+
+      @explorer_tree_view = Explorer::Treeview.new paned_view, method(:open_file)
+      paned_view.add @explorer_tree_view
+
+      @editor_notebook = Editor::Notebook.new paned_view
+      paned_view.add @editor_notebook
+    end
+
     def ask_for_unsaved_changes
       title = 'Unsaved Changes'
       message = 'There are unsaved changes'
@@ -104,17 +115,6 @@ module Pickaxe
 
     def open_file(file_path)
       @editor_notebook.add_code_view file_path if file_path
-    end
-
-    def pack_widgets
-      paned_view = Ttk::Paned.new self, orient: :horizontal
-      paned_view.pack fill: :both, expand: true
-
-      @explorer_tree_view = Explorer::Treeview.new paned_view, method(:open_file)
-      paned_view.add @explorer_tree_view
-
-      @editor_notebook = Editor::Notebook.new paned_view
-      paned_view.add @editor_notebook
     end
 
     def resize_and_center
