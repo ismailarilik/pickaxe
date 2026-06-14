@@ -5,12 +5,12 @@ require_relative 'file'
 module Pickaxe
   module Explorer
     class Treeview < Ttk::Treeview
-      def initialize(parent, open_file)
+      def initialize(parent, on_file_double_clicked)
         super parent
 
         self.show = :tree
 
-        @open_file = open_file
+        @on_file_double_clicked = on_file_double_clicked
 
         create_context_menu
 
@@ -117,7 +117,7 @@ module Pickaxe
         if item
           item_file_path = item.id
           if ::File.file? item_file_path
-            @open_file.call item_file_path
+            @on_file_double_clicked.call event, item_file_path
           end
         end
       end

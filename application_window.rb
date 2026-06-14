@@ -26,7 +26,7 @@ module Pickaxe
       paned_view = Ttk::Paned.new self, orient: :horizontal
       paned_view.pack fill: :both, expand: true
 
-      @explorer_tree_view = Explorer::Treeview.new paned_view, method(:open_file)
+      @explorer_tree_view = Explorer::Treeview.new paned_view, method(:on_file_double_clicked_on_explorer_tree_view)
       paned_view.add @explorer_tree_view
 
       @editor_notebook = Editor::Notebook.new paned_view
@@ -129,6 +129,10 @@ module Pickaxe
       will_be_destroyed = true
       will_be_destroyed = ask_for_unsaved_changes if has_unsaved_changes?
       destroy if will_be_destroyed
+    end
+
+    def on_file_double_clicked_on_explorer_tree_view(event, file_path)
+      open_file file_path
     end
   end
 end
