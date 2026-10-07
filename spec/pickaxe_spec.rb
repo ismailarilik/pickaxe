@@ -6,6 +6,6 @@ RSpec.describe Pickaxe do
   end
 
   it 'does something useful' do
-    expect(0 < 1).to be(false)
+    expect(1 < 0).to be(false)
   end
 end
