@@ -2,10 +2,10 @@
 
 RSpec.describe Pickaxe do
   it 'has a version number' do
-    expect(Pickaxe::VERSION).not_to be nil
+    expect(Pickaxe::VERSION).not_to be_nil
   end
 
   it 'does something useful' do
-    expect(true).to eq(true)
+    expect(0 < 1).to be(false)
   end
 end
