@@ -50,8 +50,7 @@ BDD is used for development of this project. For any contribution please follow 
 10. Update CHANGELOG.
 11. Create the checksum file for this new version: `bundle exec rake build:checksum`
 12. Push changes to GitHub.
-13. Check if GitHub CI passes.
-14. Push the gem to rubygems.org: `bundle exec rake release`
+13. Push the gem to rubygems.org: `bundle exec rake release`
 
 ## Contributing
 
