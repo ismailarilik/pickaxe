@@ -80,11 +80,11 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  irb
+  irb (~> 1.18)
   pickaxe!
-  rake (~> 13.0)
-  rspec (~> 3.0)
-  rubocop (~> 1.21)
+  rake (~> 13.4)
+  rspec (~> 3.13)
+  rubocop (~> 1.91)
 
 CHECKSUMS
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
