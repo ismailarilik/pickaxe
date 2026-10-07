@@ -32,6 +32,25 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+### Checklist
+
+BDD is used for development of this project. For any contribution please follow this path:
+
+1. Write a spec for your contribution.
+2. Add your code contribution.
+3. Check if all tests pass: `bundle exec rake spec`
+4. Check if Rubocop passes: `bundle exec rake rubocop`
+5. Update types.
+6. Refactor the code.
+7. Install the gem into your system: `bundle exec rake install`
+8. Run the application from the console: `pickaxe`
+9. Update the version number in `version.rb`.
+10. Update CHANGELOG.
+11. Create the checksum file for this new version: `bundle exec rake build:checksum`
+12. Push changes to GitHub.
+13. Check if GitHub CI passes.
+14. Push the gem to rubygems.org: `bundle exec rake release`
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at [https://github.com/ismailarilik/pickaxe](https://github.com/ismailarilik/pickaxe). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/ismailarilik/pickaxe/blob/main/CODE_OF_CONDUCT.md).
