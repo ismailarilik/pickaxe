@@ -6,6 +6,8 @@ Welcome to your new gem! In this directory, you'll find the files you need to be
 
 ## Installation
 
+At first you need to install [Ruby](https://www.ruby-lang.org/) and [Tcl/Tk](https://www.tcl-lang.org/).
+
 Install the gem and add to the application's Gemfile by executing:
 
 ```bash
