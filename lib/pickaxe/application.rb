@@ -7,6 +7,11 @@ module Pickaxe
   class Application
     def initialize
       @window = UI::Window.new
+      @window.title = 'pickaxe'
+    end
+
+    def title
+      @window.title
     end
 
     def start
