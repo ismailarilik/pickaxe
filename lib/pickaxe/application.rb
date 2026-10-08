@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require 'tk'
+require_relative 'ui/window'
 
 module Pickaxe
   # Application class
   class Application
     def initialize
-      @window = TkRoot.new
+      @window = Window.new
     end
 
     def start
-      @window.mainloop
+      @window.run
     end
   end
 end
