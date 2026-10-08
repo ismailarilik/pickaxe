@@ -3,14 +3,24 @@
 require 'tk'
 
 module Pickaxe
-  # Window class
-  class Window
-    def initialize
-      @tk_window = TkRoot.new
-    end
+  module UI
+    # Window class
+    class Window
+      def initialize
+        @tk_window = TkRoot.new
+      end
 
-    def run
-      @tk_window.mainloop
+      def title
+        @tk_window.title
+      end
+
+      def title=(value)
+        @tk_window.title = value
+      end
+
+      def run
+        @tk_window.mainloop
+      end
     end
   end
 end

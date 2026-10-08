@@ -6,7 +6,7 @@ module Pickaxe
   # Application class
   class Application
     def initialize
-      @window = Window.new
+      @window = UI::Window.new
     end
 
     def start
